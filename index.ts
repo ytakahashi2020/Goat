@@ -5,13 +5,13 @@ import { getOnChainTools } from "@goat-sdk/adapter-vercel-ai";
 import { sendSOL, solana } from "@goat-sdk/wallet-solana";
 
 import { Connection, Keypair } from "@solana/web3.js";
+import { jupiter } from "@goat-sdk/plugin-jupiter";
+import { splToken } from "@goat-sdk/plugin-spl-token";
 
 import { sns } from "@goat-sdk/plugin-sns";
 import base58 from "bs58";
 
 require("dotenv").config();
-
-console.log("dddd");
 
 const connection = new Connection(process.env.RPC_PROVIDER_URL as string);
 const keypair = Keypair.fromSecretKey(
@@ -26,7 +26,8 @@ const keypair = Keypair.fromSecretKey(
     }),
     plugins: [
       sendSOL(), // Enable SOL transfers
-      //   sns(), // Enable SNS domain resolution
+      jupiter(),
+      splToken(),
     ],
   });
 
@@ -34,7 +35,9 @@ const keypair = Keypair.fromSecretKey(
     model: openai("gpt-4o-mini"),
     tools: tools,
     maxSteps: 5, // Maximum number of tool invocations per request
-    prompt: "Send 0.005 SOL to 8BgiiWipqoSf6zadDF8EcA3MDTCXFampjX7AJ46ZEFky",
+    // prompt: "Send 0.005 SOL to 8BgiiWipqoSf6zadDF8EcA3MDTCXFampjX7AJ46ZEFky",
+    prompt:
+      "Swap 0.001 USDC for JUP(JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN)",
   });
 
   console.log(result.text);
