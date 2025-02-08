@@ -8,7 +8,6 @@ import { Connection, Keypair } from "@solana/web3.js";
 import { jupiter } from "@goat-sdk/plugin-jupiter";
 import { splToken } from "@goat-sdk/plugin-spl-token";
 
-import { sns } from "@goat-sdk/plugin-sns";
 import base58 from "bs58";
 
 require("dotenv").config();
